@@ -1,6 +1,6 @@
 /*
  * Sonar Groovy Plugin
- * Copyright (C) 2010-2021 SonarQube Community
+ * Copyright (C) 2010-2025 SonarQube Community
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -42,7 +42,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -232,7 +231,6 @@ public class CodeNarcSensor implements Sensor {
                 "Path to the CodeNarc XML reports. Paths may be absolute or relative to the project base directory.")
             .category(Groovy.NAME)
             .subCategory("CodeNarc")
-            .onQualifiers(Qualifiers.PROJECT)
             .multiValues(true)
             .deprecatedKey(CODENARC_REPORT_PATH)
             .build());

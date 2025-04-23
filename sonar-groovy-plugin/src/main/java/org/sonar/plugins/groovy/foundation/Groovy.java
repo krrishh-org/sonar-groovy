@@ -1,6 +1,6 @@
 /*
  * Sonar Groovy Plugin
- * Copyright (C) 2010-2021 SonarQube Community
+ * Copyright (C) 2010-2025 SonarQube Community
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,11 +25,11 @@ import org.apache.commons.lang.StringUtils;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.AbstractLanguage;
-import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.config.PropertyDefinition.ConfigScope;
 
 public class Groovy extends AbstractLanguage {
 
-  public static final String KEY = "grvy";
+  public static final String KEY = "groovy";
   public static final String NAME = "Groovy";
   public static final String FILE_SUFFIXES_KEY = "sonar.groovy.file.suffixes";
   static final String DEFAULT_FILE_SUFFIXES = ".groovy";
@@ -41,6 +41,16 @@ public class Groovy extends AbstractLanguage {
   public Groovy(Configuration settings) {
     super(KEY, NAME);
     this.settings = settings;
+  }
+
+  @Override
+  public String getKey() {
+    return KEY;
+  }
+
+  @Override
+  public String getName() {
+    return NAME;
   }
 
   @Override
@@ -82,7 +92,7 @@ public class Groovy extends AbstractLanguage {
                 "Comma-separated list of suffixes for files to analyze. To not filter, leave the list empty.")
             .category(Groovy.NAME)
             .subCategory("Base")
-            .onQualifiers(Qualifiers.PROJECT)
+            .onConfigScopes(ConfigScope.PROJECT)
             .defaultValue(DEFAULT_FILE_SUFFIXES)
             .multiValues(true)
             .build());

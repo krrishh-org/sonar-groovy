@@ -2086,7 +2086,7 @@ deadlock.</p>
     <description><![CDATA[<p>Synchronization on a String field can lead to deadlock. Constant Strings are interned and shared across all other
 classes loaded by the JVM. Thus, this could is locking on something that other code might also be locking. This could
 result in very strange and hard to diagnose blocking and deadlock behavior.</p>
-<p>See <a href="http://www.javalobby.org/java/forums/t96352.html">JETTY-352</a> and <a href="http://jira.codehaus.org/browse/JETTY-352">http://jira.codehaus.org/browse/JETTY-352</a>.</p>
+<p>See <a href="http://www.javalobby.org/java/forums/t96352.html">JETTY-352</a> and <a href="http://jira.apache.org/browse/JETTY-352">http://jira.apache.org/browse/JETTY-352</a>.</p>
 <p>Examples:</p>
 <pre><code>    class MyClass {
 
@@ -5801,7 +5801,7 @@ service classes which are singletons, by default, and so they should be reentran
 <p>This rule ignores <code>final</code> fields (either instance or static). Fields that are
 <code>static</code> and non-<code>final</code>, however, do cause a violation.</p>
 <p>This rule also ignores all classes annotated with the <code>@Immutable</code> transformation.
-See <a href="http://groovy.codehaus.org/Immutable+transformation">http://groovy.codehaus.org/Immutable+transformation</a>.</p>
+See <a href="http://groovy.apache.org/Immutable+transformation">http://groovy.apache.org/Immutable+transformation</a>.</p>
 <p>This rule also ignores all fields annotated with the <code>@Inject</code> or <code>@Value</code> annotations.</p>
 <p>You can configure this rule to ignore certain fields either by name or by type. This can be
 useful to ignore fields that hold references to (static) dependencies (such as DAOs or
@@ -6161,7 +6161,7 @@ that they should be stateless.</p>
 <ul>
 <li>All <code>final</code> fields (either instance or static). Note that fields that are <code>static</code> and non-<code>final</code>, however, do cause a violation.</li>
 <li>Non-<code>static</code> properties (i.e., no visibility modifier specified) declared with <code>def</code>.</li>
-<li>All classes annotated with the <code>@Immutable</code> transformation. See <a href="http://groovy.codehaus.org/Immutable+transformation">http://groovy.codehaus.org/Immutable+transformation</a>.</li>
+<li>All classes annotated with the <code>@Immutable</code> transformation. See <a href="http://groovy.apache.org/Immutable+transformation">http://groovy.apache.org/Immutable+transformation</a>.</li>
 <li>All fields annotated with the <code>@Inject</code> annotation.</li>
 <li>All fields with names matching the <em>ignoreFieldNames</em> property.</li>
 <li>All fields with types matching the <em>ignoreFieldTypes</em> property.</li>

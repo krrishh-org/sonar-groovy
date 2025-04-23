@@ -27,14 +27,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.sonarsource.sonarqube</groupId>
+      <groupId>org.sonarsource.api.plugin</groupId>
       <artifactId>sonar-plugin-api</artifactId>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.ant</groupId>
-      <artifactId>ant</artifactId>
-      <version>1.10.13</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -61,7 +56,7 @@
     </dependency>
     <dependency>
       <groupId>org.gmetrics</groupId>
-      <artifactId>GMetrics</artifactId>
+      <artifactId>GMetrics-Groovy4</artifactId>
     </dependency>
 
     <dependency>
@@ -100,6 +95,11 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.groovy</groupId>
+      <artifactId>groovy</artifactId>
+      <version>4.0.26</version>
     </dependency>
   </dependencies>
 

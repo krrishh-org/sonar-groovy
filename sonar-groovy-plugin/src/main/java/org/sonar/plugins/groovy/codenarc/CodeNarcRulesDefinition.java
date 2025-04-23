@@ -1,7 +1,6 @@
 /*
  * Sonar Groovy Plugin
- * Copyright (C) 2010-2021 SonarQube Community
- *  
+ * Copyright (C) 2010-2025 SonarQube Community
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +18,6 @@
  */
 package org.sonar.plugins.groovy.codenarc;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,7 +27,6 @@ import org.apache.commons.io.IOUtils;
 import org.sonar.api.server.debt.DebtRemediationFunction;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
-import org.sonar.api.utils.MessageException;
 import org.sonar.plugins.groovy.foundation.Groovy;
 
 public class CodeNarcRulesDefinition implements RulesDefinition {
@@ -67,14 +64,10 @@ public class CodeNarcRulesDefinition implements RulesDefinition {
   private static Map<String, String> getCostByRule() {
     Map<String, String> result = new HashMap<>();
     List<String> lines;
-    try {
-      lines =
-          IOUtils.readLines(
-              CodeNarcRulesDefinition.class.getResourceAsStream(COST_FILE_PATH),
-              StandardCharsets.UTF_8);
-    } catch (IOException e) {
-      throw MessageException.of("Unable to load rules remediation function/factor", e);
-    }
+    lines =
+        IOUtils.readLines(
+            CodeNarcRulesDefinition.class.getResourceAsStream(COST_FILE_PATH),
+            StandardCharsets.UTF_8);
 
     lines.stream().skip(1).forEach(line -> CodeNarcRulesDefinition.completeCost(line, result));
 
