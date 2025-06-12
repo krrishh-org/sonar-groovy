@@ -18,6 +18,8 @@
  */
 package org.sonar.plugins.groovy.foundation;
 
+import groovyjarjarantlr4.v4.runtime.RecognitionException;
+import groovyjarjarantlr4.v4.runtime.Token;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,19 +28,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
-
-import groovyjarjarantlr4.v4.runtime.RecognitionException;
-import groovyjarjarantlr4.v4.runtime.Token;
 import org.apache.commons.lang.StringUtils;
 import org.apache.groovy.parser.antlr4.GroovyLangLexer;
 import org.apache.groovy.parser.antlr4.GroovyLexer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class GroovyHighlighterAndTokenizer {
 
@@ -140,7 +139,6 @@ public class GroovyHighlighterAndTokenizer {
 
       GroovyLexer groovyLexer = new GroovyLangLexer(streamReader);
 
-
       Token token = groovyLexer.nextToken();
 
       int type = token.getType();
@@ -148,16 +146,16 @@ public class GroovyHighlighterAndTokenizer {
         String text = token.getText();
         TypeOfText typeOfText = typeOfText(type, text).orElse(null);
         int lines = StringUtils.countMatches(text, "\n");
-        String lastLine = text.substring(text.lastIndexOf("\n") + 1);
+        String lastLine = lines == 0 ? text : text.substring(text.lastIndexOf("\n"));
         if (StringUtils.isNotBlank(text)) {
-          tokens.add(
-              new GroovyToken(
-                  token.getLine(),
-                  token.getCharPositionInLine(),
-                  token.getLine() + lines,
-                      lines == 0? token.getCharPositionInLine() + text.length(): lastLine.length(),
-                  getImage(token, text),
-                  typeOfText));
+          GroovyToken gt = new GroovyToken(
+                          token.getLine(),
+                          token.getCharPositionInLine(),
+                          token.getLine() + lines,
+                          lines == 0 ? token.getCharPositionInLine() + text.length() : lastLine.length()-1,
+                          getImage(token, text),
+                          typeOfText);
+          tokens.add(gt);
         }
         token = groovyLexer.nextToken();
         type = token.getType();

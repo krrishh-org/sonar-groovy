@@ -24,8 +24,8 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.config.PropertyDefinition.ConfigScope;
+import org.sonar.api.resources.AbstractLanguage;
 
 public class Groovy extends AbstractLanguage {
 

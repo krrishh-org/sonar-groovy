@@ -18,6 +18,8 @@
  */
 package org.sonar.plugins.groovy;
 
+import groovyjarjarantlr4.runtime.Token;
+import groovyjarjarantlr4.v4.runtime.CommonToken;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -29,8 +31,6 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import groovyjarjarantlr4.runtime.Token;
-import groovyjarjarantlr4.v4.runtime.CommonToken;
 import org.apache.commons.io.IOUtils;
 import org.apache.groovy.parser.antlr4.GroovyLangLexer;
 import org.apache.groovy.parser.antlr4.GroovyLexer;
@@ -97,11 +97,11 @@ public class GroovySensor implements Sensor {
       List<InputFile> inputFiles = groovyFileSystem.sourceInputFiles();
       computeBaseMetrics(context, inputFiles);
       computeGroovyMetrics(context, inputFiles);
-        try {
-            highlightFiles(context, groovyFileSystem.groovyInputFiles());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+      try {
+        highlightFiles(context, groovyFileSystem.groovyInputFiles());
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     }
   }
 
@@ -181,7 +181,8 @@ public class GroovySensor implements Sensor {
     fileLinesContext.save();
   }
 
-  private static void highlightFiles(SensorContext context, List<InputFile> inputFiles) throws IOException {
+  private static void highlightFiles(SensorContext context, List<InputFile> inputFiles)
+      throws IOException {
     for (InputFile inputFile : inputFiles) {
       new GroovyHighlighterAndTokenizer(inputFile).processFile(context);
     }
